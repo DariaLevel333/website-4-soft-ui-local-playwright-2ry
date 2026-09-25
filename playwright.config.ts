@@ -11,6 +11,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './playwright/e2e',
+  globalSetup: "./playwright/global-setup.ts",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -34,4 +35,11 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
+    /* Start the local Express server for tests */
+  webServer: {
+    command: "node app.js",
+    port: 1342,
+    reuseExistingServer: true,
+    timeout: 120 * 1000,
+  },
 });

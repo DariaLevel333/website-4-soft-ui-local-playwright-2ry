@@ -1,28 +1,42 @@
-name: Node.js CI
+name: Level CI Analysis
 on:
   pull_request:
-    branches: ['main']
+    branches:
+      - "**"
   push:
-    branches: ['main']
+    branches:
+      - main
+      - branch-*
+      - develop
+      - "release/**"
+      - "hotfix/**"
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
-    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
       - name: Install npm packages
-        run: |
-          npm install
-          nohup npm run dev > output.log 2>&1 &
-          sleep 5
-          curl -I http://localhost:1342/
-      - name: Run Cypress tests
-        run: |
-          npm run test:cypress
-      # - name: Run Playwright tests
-      #   run: |
-      #     npx playwright install chromium
-      #     npm run test:playwright
+        run: npm ci
+        env:
+          CLOUDSMITH_TOKEN: ${{ secrets.CLOUDSMITH_TOKEN }}
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium
+      - name: Run Playwright tests
+        run: npm run test:playwright
+
+      - name: Level CI Accessibility Analysis
+        uses: levelaccess/level-ci@dev
+        env:
+          LEVEL_CI_TOKEN: ${{ secrets.LEVEL_CI_TOKEN }}
+        with:
+          secondary_repository_key: project-b
+          branch: main
+          commit_hash: ${{ github.sha }}
+          token: ${{ secrets.LEVEL_CI_TOKEN }}
+          report_paths: './level-ci-reports'
