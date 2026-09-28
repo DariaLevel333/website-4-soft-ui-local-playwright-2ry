@@ -6,9 +6,9 @@ export default {
  token: process.env.LEVEL_CI_TOKEN,
  server: "https://api.dev.userway.dev",
  override: {
-    'feature-c': {
+    'feature-d': {
     scope: 'delta',
-    targetBranch: 'feature-b'
+    targetBranch: 'feature-c'
     },
     },
  reportPaths: ['./level-ci-reports']
