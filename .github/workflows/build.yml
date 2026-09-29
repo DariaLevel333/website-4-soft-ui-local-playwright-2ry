@@ -36,7 +36,7 @@ jobs:
           LEVEL_CI_TOKEN: ${{ secrets.LEVEL_CI_TOKEN }}
         with:
           secondary_repository_key: project-b
-          branch: main
+          branch: feature-x
           commit_hash: ${{ github.sha }}
           token: ${{ secrets.LEVEL_CI_TOKEN }}
           report_paths: './level-ci-reports'
