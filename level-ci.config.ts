@@ -5,11 +5,5 @@ export default {
  project: 'level-ci-playwright-sample-github-1ry',
  token: process.env.LEVEL_CI_TOKEN,
  server: "https://api.dev.userway.dev",
- reportPaths: ['./level-ci-reports'],
- override: {
-    'feature-e': {
-    scope: 'delta',
-    targetBranch: 'feature-one'
-    },
-    }
+ reportPaths: ['./level-ci-reports']
 } satisfies Config;
