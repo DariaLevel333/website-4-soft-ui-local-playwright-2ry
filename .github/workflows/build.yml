@@ -39,5 +39,6 @@ jobs:
           secondary_repository_key: project-b
           branch: feature-e
           commit_hash: ${{ github.sha }}
+          pull_request_number: ${{ github.event.number }}
           token: ${{ secrets.LEVEL_CI_TOKEN }}
           report_paths: './level-ci-reports'
