@@ -6,8 +6,6 @@ on:
   push:
     branches:
       - main
-      - branch-*
-      - feature-*
       - develop
       - "release/**"
       - "hotfix/**"
@@ -39,6 +37,6 @@ jobs:
           secondary_repository_key: project-b
           branch: feature-e
           commit_hash: ${{ github.sha }}
-          pull_request_number: 1
+          pull_request: 1
           token: ${{ secrets.LEVEL_CI_TOKEN }}
           report_paths: './level-ci-reports'
