@@ -35,7 +35,7 @@ jobs:
         env:
           LEVEL_CI_TOKEN: ${{ secrets.LEVEL_CI_TOKEN }}
         with:
-          secondary_repository_key: project-b
+          secondary_repository_key: project-bsfgfhdfghdfghftyjdrthfnxcv
           branch: main
           commit_hash: ${{ github.sha }}
           token: ${{ secrets.LEVEL_CI_TOKEN }}
